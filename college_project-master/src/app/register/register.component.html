@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-dark" >
+        <a class="navbar-brand" style="cursor:default; color: floralwhite;" >JNTUHCES</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                <a class="nav-item nav-link active" style="color: floralwhite;" routerLink='/'>Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" style="color: floralwhite;" routerLink='/login'>Login</a>
+                <a class="nav-item nav-link" style="color: floralwhite;" routerLink='/register'>Signup</a>
+                <a class="nav-item nav-link" style="color: floralwhite;" routerLink='/contact'>Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4" style="text-align: center;">Signup Page</h1>
+            <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <form #signUpForm="ngForm" (ngSubmit)="register()" name='signUpForm'>
+          <div class="form-group">
+            <label for="userName">UserName</label>
+            <input type="text" name="userName" class="form-control" [(ngModel)]="userName" id="userName" #title="ngModel" aria-describedby="userNameHelp"  required >
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" [(ngModel)]="email" id="email" #title="ngModel" aria-describedby="emailHelp" ngModel email required >
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="password" #title="ngModel"  ngModel passwordToggle required>
+            <!-- <show-hide-password size="lg" btnStyle="primary" [btnOutline]="false">
+              <input type="password" class="form-control" [(ngModel)]="password" #title="ngModel" id="password" required>
+            </show-hide-password> -->
+          </div>
+          <!-- <div class="custom-control custom-radio">
+  						<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+  						<label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+  					</div>
+  					<div class="custom-control custom-radio">
+  						<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+  						<label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+  					</div> -->
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="faculty" [(ngModel)]="gridRadios" value="faculty" checked>
+                  <label class="form-check-label" for="faculty">
+                    Faculty
+                  </label>
+
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" [(ngModel)]="gridRadios" name="gridRadios" id="student" value="student">
+                  <label class="form-check-label" for="student">
+                    Student
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group">
+            <label for="branch">Branch</label>
+            <select class="form-control" name="branch" id="branch" #title="ngModel" [(ngModel)]="branch" required>
+              <option>CSE</option>
+              <option>ECE</option>
+              <option>CEE</option>
+              <option>MNT</option>
+  
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <input type="text" name="bio" class="form-control" [(ngModel)]="bio" id="bio" #title="ngModel" aria-describedby="userNameHelp"  required >
+          </div>
+         
+          <button type="submit" class="btn btn-primary" [disabled]="!signUpForm.form.valid ">Submit</button>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+
+</div>

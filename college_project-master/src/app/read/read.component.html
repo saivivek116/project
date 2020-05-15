@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" >
+    <a class="navbar-brand" style="cursor:default; color: floralwhite;" >JNTUHCES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" (click)="globalPosts()" style="cursor: pointer; color: floralwhite;">Global Feed<span class="sr-only">
+          </span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/post'>Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer; color: floralwhite;" [routerLink]="['/profile',username]">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/bookmarks'>Bookmarks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/users'>Users</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer; color: floralwhite;" (click)="signOutFunction()">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<div class="container" *ngIf="currentPost">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <h5 class="card-header">{{currentPost.author}}</h5>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{currentPost.title}}</h5>
+                    <h6 *ngIf="currentPost.tags.length>0">Tags:<span *ngFor="let tag of currentPost.tags;let first=first;let last=last;">
+                            {{tag}}{{last ? '':','}}</span> </h6>
+                    <p class="card-text">{{currentPost.description}}</p>
+                    
+                    <p class="card-text">{{currentPost.blogBody}}</p>
+                    
+                </div>
+                <div class="card-footer text-muted">
+                    {{currentPost.lastModified}}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    <div class="row" *ngIf='isOwn || testadmin'>
+        <div class="col-md-2 col-sm-12">
+            <a [routerLink]="['/edit',currentPost.blogId]" class="btn btn-secondary">Edit</a>
+        </div>
+        <div class="col-md-2 col-sm-12 ">
+            <a [routerLink]="['/delete',currentPost.blogId]" class="btn btn-danger" (click)='blogDelete(currentPost.blogId)' >Delete</a>
+        </div>
+        
+    </div>
+    <div class="row" *ngIf="!isOwn">
+        <div class="col offset-8">
+            <a  class="btn btn-danger"
+                (click)='addToBookmarks(currentPost.blogId)'>Add to Bookmarks</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form #commentForm="ngForm" (ngSubmit)="createComment()">
+                <div class="form-group" >
+                    <label for="commentArea">Post Your Comment </label>
+                    <textarea class="form-control" id="commentArea" rows="3" name="comment" [(ngModel)]="comment" #title="ngModel" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!commentForm.form.valid">Post</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <button (click)="showComments()" class="btn btn-primary">View Comments</button>
+    <br>
+    <br>
+    <div class='row' *ngIf="allComments?.length>0">
+        <div class='col-md-12 col-sm-12' *ngFor="let comment of allComments">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{comment.author}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{comment.comment}}</h6>
+                    <p class="card-text">Commented on {{comment.commentDate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

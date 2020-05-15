@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row" style="text-align: left;" *ngIf="currentBlog">
+    <div class="col-md-12">
+      <form #createBlogForm="ngForm" (ngSubmit)="editThisBlog()">
+        <div class="form-group">
+          <label>Blog Title</label>
+          <input type="text" name="blogTitle" [(ngModel)]="currentBlog.title" #title="ngModel" class="form-control"
+            required>
+        </div>
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+          Blog Title is required
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" name="blogDescription" [(ngModel)]="currentBlog.description" #description="ngModel"
+            class="form-control" placeholder="Enter" required>
+        </div>
+        <div class="form-group">
+          <label>Enter the blog Body</label>
+          <textarea name="blogBody" [(ngModel)]="currentBlog.blogBody" #body="ngModel" class="form-control"
+            rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Branch</label>
+          <select [(ngModel)]="currentBlog.branch" #branch="ngModel" name="branch" class="form-control"
+            id="required" required>
+            <option *ngFor="let branch of branches" [value]="branch">{{branch}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!createBlogForm.form.valid">Post the Blog</button>
+      </form>
+    </div>
+  </div>
+</div>

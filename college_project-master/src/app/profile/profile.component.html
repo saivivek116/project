@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" >
+  <a class="navbar-brand" style="cursor:default; color: floralwhite;" >JNTUHCES</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="globalPosts()" style="cursor: pointer; color: floralwhite;">Global Feed<span class="sr-only">
+        </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/post'>Post</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer; color: floralwhite;" [routerLink]="['/profile',username]">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/bookmarks'>Bookmarks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/users'>Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer; color: floralwhite;" (click)="signOutFunction()">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class='conatiner-fluid'>
+  <div class="jumbotron jumbotron-fluid " *ngIf="profile" style="text-align: center;">
+    <h1 class="display-4">{{profile.userName}}</h1>
+    <p class="lead">{{profile.email}}&emsp;{{profile.branch}}&emsp;{{profile.work}}</p>
+    <h4>BIO</h4>
+    <p class="lead" >{{profile.bio}}</p>
+    <hr class="my-4">
+    <div *ngIf="">
+    <a class="btn btn-primary btn-lg" routerLink='/update-profile' role="button">update</a>
+    </div>
+  </div>
+  <div class='row' *ngIf="userBlogs">
+    <div class='col-md-12' *ngFor="let blog of userBlogs">
+      <div class="card">
+        <h5 class="card-header">{{blog.title}}</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{blog.description}}</h5>
+          <h6 *ngIf="blog.tags.length>0">Tags:<span *ngFor="let tag of blog.tags;let first=first;let last=last;">
+              {{tag}}{{last ? '':','}}</span> </h6>
+          <p class="card-text">Last Modified:{{blog.lastModified}}</p>
+          <a [routerLink]="['/read',blog.blogId]" class="btn btn-primary">Read</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
