@@ -1,51 +1,52 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand" style="cursor:default; color: floralwhite;">JNTUHCES</a>
+  <a class="navbar-brand" style="cursor:default; color: floralwhite;">JNTUHCES Community</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" (click)="globalPosts()" style="cursor: pointer; color: floralwhite;">Global Feed<span
-            class="sr-only">
-          </span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/post'>Post</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer; color: floralwhite;"
-          [routerLink]="['/profile',username]">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/bookmarks'>Bookmarks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/users'>Users</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer; color: floralwhite;" (click)="signOutFunction()">Log Out</a>
-      </li>
-    </ul>
-  </div>
+  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" (click)="globalPosts()" style="cursor: pointer; color: floralwhite;">Global Feed<span
+        class="sr-only">
+      </span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/post'>Post</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer; color: floralwhite;"
+      [routerLink]="['/profile',username]">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/bookmarks'>Bookmarks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer; color: floralwhite;" routerLink='/users'>Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer; color: floralwhite;" (click)="signOutFunction()">Log Out</a>
+    </li>
+  </ul>
+</div>
 </nav>
 <div class="container-fluid">
-  
-<div class='row' *ngIf="allusers?.length>0">
-    <div class='col-md-12 col-sm-12' *ngFor="let user of allusers">
-      <div class="card">
-        <span><h5 class="card-header">{{user.userName}}</h5></span>
-      <span><button class="btn btn-outline-success" [routerLink]="['/profile',user.userName]">View Profile</button></span>
-      <span><button class="btn btn-outline-danger" (click)="deleteUser(user.userName)" *ngIf="isAdmin">Block</button></span>  
-      <div class="card-body">
-          <p class="card-text">Email Id : {{user.email}}&emsp;&emsp;&nbsp;   Branch : {{user.branch}} &emsp;&emsp;&nbsp;   Joined : {{user.joined}}</p>
-          
-         <!-- <p class="card-text"></p>
-          Joined:<p class="card-text"></p> -->
-          <!-- <a [routerLink]="['/read',post.blogId]" class="btn btn-primary">Read</a> -->
+  <div class="col-md-12 col-sm-12">
+    <input type="text" name="FUserName" class="form-control" [(ngModel)]="FUserName" 
+    placeholder="search user name here" (keyup)="complete(FUserName)"/>
+    <div class="form-fill">
+      <div class="form-fill-item" *ngFor="let user of Users">
+        <div class="card" *ngIf="user.userName!=UserName">
+          <div class="card-header">
+            <h5>{{user.userName}}</h5>
+            <button class="btn btn-outline-success side" [routerLink]="['/profile',user.userName]">View Profile</button>
+            <button *ngIf="isAdmin" class="btn btn-outline-danger side" (click)="deleteUser(user.userName)">Block</button>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Email Id : {{user.email}}&emsp;&emsp;&nbsp;   Branch : {{user.branch}} &emsp;&emsp;&nbsp;   Joined : {{user.joined}}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>

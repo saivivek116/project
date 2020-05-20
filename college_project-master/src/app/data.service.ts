@@ -42,4 +42,5 @@ export class DataService {
   public getBookmarkedPosts(userId){
     return this._http.get(`${this.url}/bookmarkedposts/${userId}`);
   }
+  
 }

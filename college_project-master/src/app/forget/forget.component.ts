@@ -9,7 +9,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./forget.component.css']
 })
 export class ForgetComponent implements OnInit {
-
+  
   constructor(private _route: ActivatedRoute, private router: Router, private authservice: AuthService, private toastr: ToastrManager) { }
   public email;
   ngOnInit() {
@@ -17,8 +17,7 @@ export class ForgetComponent implements OnInit {
   forgetPassword(){
     console.log(this.email);
     let emailobj={
-      email:this.email
-      
+      email:this.email 
     }
     this.authservice.forgetPassword(emailobj).subscribe(data => {
       this.toastr.successToastr('password sent Successfully.', 'Success!');
@@ -28,7 +27,7 @@ export class ForgetComponent implements OnInit {
     }, err => {
       console.log(err);
       this.toastr.errorToastr(err, 'Oops!');
-    })
+    });
   }
-
+  
 }

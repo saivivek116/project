@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark" >
-  <a class="navbar-brand" style="cursor:default; color: floralwhite;" >JNTUHCES</a>
+  <a class="navbar-brand" style="cursor:default; color: floralwhite;" >JNTUHCES Community</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,11 @@
     <h4>BIO</h4>
     <p class="lead" >{{profile.bio}}</p>
     <hr class="my-4">
-    <div *ngIf="">
+    <div *ngIf="isOwn">
     <a class="btn btn-primary btn-lg" routerLink='/update-profile' role="button">update</a>
     </div>
   </div>
+  <h1 class="text-center display-4">Your Blogs</h1>
   <div class='row' *ngIf="userBlogs">
     <div class='col-md-12' *ngFor="let blog of userBlogs">
       <div class="card">

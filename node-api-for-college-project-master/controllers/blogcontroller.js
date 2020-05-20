@@ -61,8 +61,8 @@ exports.viewByAuthor = (req, res) => {
       console.log(err)
       res.send(err)
     } else if (result == undefined || result == null || result == '') {
-      console.log('No Blog Found')
-      res.send("No Blog Found")
+      console.log('No Blog Found');
+      res.send({"result":"No blogs found"});
     } else {
       res.send(result)
       
@@ -199,29 +199,3 @@ exports.bookmarkedBlogs=function(req,res) {
     }
   })
 }
-// function getB(res,bookmarksArray){
-//   let obj=[];
-//   for(let b of bookmarksArray){
-//     BlogModel.findOne({ 'blogId': b }, (err, result) => {
-      
-//       if (err) {
-//         console.log(err)
-//         res.send(err)
-//       } else if (result == undefined || result == null || result == '') {
-//         console.log('No Blog Found')
-//         res.send("No Blog Found")
-//       } else {
-//         obj.push(result);
-//         console.log(obj);
-        
-//         // res.send(result)
-//       }
-//     })
-    
-//   }
-//   return obj;
-//   // res.send
-//   // console.log(obj);
-//   // res.send(obj);
-  
-// }

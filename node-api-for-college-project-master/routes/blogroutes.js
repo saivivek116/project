@@ -18,5 +18,6 @@ router.put( '/:blogId/edit', blogController.editBlog);
 router.post( '/create', blogController.createBlog);
 // router.post('/addToBookmarks',blogController.addToBookmarks);
 router.get('/bookmarkedposts/:userId', blogController.bookmarkedBlogs);
+
 // router.get( '/:blogId/count/view', blogController.increaseBlogView);
 module.exports=router;

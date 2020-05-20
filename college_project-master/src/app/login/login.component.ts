@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('work', this.profile.work);
           localStorage.setItem('branch', this.profile.branch);
           localStorage.setItem('bio',this.profile.bio);
+          localStorage.setItem('bookmarks',this.profile.bookmarks);
           console.log("data acquired");
         },err=>{
             console.log(err);

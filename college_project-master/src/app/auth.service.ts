@@ -77,4 +77,7 @@ export class AuthService {
   public getAllUsers(){
     return this._http.get(`${this.baseUrl}/allUsers`);
   }
+  public deleteBookmark(book){
+    return this._http.put(`${this.baseUrl}/deleteBookmark`,book);
+  }
 }

@@ -103,7 +103,7 @@ exports.forgetPassword=function(req,res){
     }
     else{
       mail.forgetpass(toemail,user.password);
-      res.send("successful");
+      res.send({"result":"succesful"});
     }
     
   })
@@ -237,6 +237,7 @@ exports.deleteUser = (req, res) => {
       console.log('No User Found')
       res.send("No User Found")
     } else {
+      console.log(result);
       res.send(result)
       
     }
@@ -253,4 +254,26 @@ exports.deleteUser = (req, res) => {
       
     }
   });
+}
+exports.deleteBookmark=function(req,res){
+  
+  let book=req.body;
+  console.log(book.username);
+  User.update({userName:book.username},
+    { $pull: { bookmarks: { $in: [ book.blogId ] } } },
+    { multi: true }
+    ).exec((err, result) => {
+
+      if (err) {
+        console.log(err)
+        res.send(err)
+      } else if (result == undefined || result == null || result == '') {
+        console.log('No User found')
+        res.send("No User found")
+      } else {
+        console.log(result,"deleted");
+        res.send(result)
+  
+      }
+    });
 }

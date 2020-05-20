@@ -15,28 +15,54 @@ export class ReadComponent implements OnInit {
   public allComments;
   public username= localStorage.getItem('username');
   public testadmin=false;
-  
+  public bookmarked:boolean=false;
   public isOwn=false;
+  public bookmarks:any[];
+  public profile;
   constructor(private _route: ActivatedRoute, private router: Router, private data: DataService, private toastr: ToastrManager, private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.getProfile(this.username).subscribe(data=>{
+      this.profile=data;
+      this.bookmarks=this.profile.bookmarks;
+      console.log(this.bookmarks);
+      console.log(this.bookmarked);
     this.auth.checkUser();
+    console.log("these are bookmarks");
+    console.log(this.bookmarks);
+    
     if(localStorage.getItem('_id')=='S7xHNG9MS')
     {
       this.testadmin=true;
     }
     let id:String=this._route.snapshot.paramMap.get("blogId");
+    console.log(this.bookmarks.length);
+    for(let i=0;i<this.bookmarks.length;i++)
+    {
+      console.log(id.localeCompare(this.bookmarks[i]));
+      console.log(this.bookmarks[i]);
+      if(id.localeCompare(this.bookmarks[i])==0)
+      {
+        console.log("blogid match");
+        this.bookmarked=true;
+      }
+    }
     console.log("this is ", id);
     this.data.getApost(id).subscribe(data=>{
       console.log(data);
       this.currentPost=data;
       if (localStorage.getItem('_id') == this.currentPost.userId) {
+        // console.log("matched")
         this.isOwn = true;
       }
     },err=>{
       console.log("error");
       console.log(err);
     });
+    },err=>{
+        console.log(err);
+    });
+    
     
   }
   public globalPosts(){
@@ -82,6 +108,7 @@ this.data.getAllComments(this.currentPost.blogId).subscribe(data => {
   }
 
   public addToBookmarks(blogId){
+    this.bookmarked=true;
     let blogObj={
       email:localStorage.getItem('email'),
       blogId:blogId
@@ -92,6 +119,22 @@ this.data.getAllComments(this.currentPost.blogId).subscribe(data => {
     },err=>{
         this.toastr.errorToastr('Error in adding bookmarks.', 'Oops!');
         console.log(err);
+    })
+  }
+
+  public removeBookmark(blogId)
+  {
+    this.bookmarked=false;
+    let book={
+      username:this.username,
+      blogId:blogId
+    }
+    this.auth.deleteBookmark(book).subscribe(data=>{
+      this.toastr.successToastr('This is success toast.', 'Success!');
+      console.log(data);
+    },error=>{
+      console.log(error);
+        this.toastr.errorToastr('This is error toast.', 'Oops!');
     })
   }
 }

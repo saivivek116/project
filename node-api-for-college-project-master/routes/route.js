@@ -14,5 +14,6 @@ router.post('/addToBookmarks',cors(), controller.addToBookmarks);
 router.get('/allUsers',cors(),controller.getAllUsers);
 router.post('/forgetPassword',cors(),controller.forgetPassword);
 router.post('/deleteUser/:username',cors(),controller.deleteUser);
+router.put('/deleteBookmark',controller.deleteBookmark);
 // router.get()
 module.exports=router;
