@@ -8,12 +8,7 @@
             <input type="userName" name="userName" class="form-control" [(ngModel)]="profile.userName" id="userName"
               #title="ngModel" aria-describedby="userNameHelp" required>
           </div>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" name="email" class="form-control" [(ngModel)]="profile.email" id="email" #title="ngModel"
-              aria-describedby="emailHelp" required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
+          
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" name="password" class="form-control" [(ngModel)]="profile.password" #title="ngModel" ngModel
