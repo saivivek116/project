@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* footer {
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(128, 123, 121);
+    color: white;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+  } */
+  .footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(128, 123, 121);
+    color: white;
+    text-align: center;
+  }

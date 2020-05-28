@@ -4,3 +4,6 @@ border-left:5px solid #8ef803;
 .ng-invalid:not(form){
 border-left:5px solid #f80303;
 }
+.footer {
+    position: fixed !important;
+  }
