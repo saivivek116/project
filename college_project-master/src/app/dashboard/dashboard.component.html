@@ -61,7 +61,17 @@
         
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
+      <input type="text" name="FTag" class="form-control" [(ngModel)]="FTag" 
+      placeholder="search tags here" (keyup)="complete(FTag)"/>
+      <div class="row">
+      <div class="col-md-3 col-sm-4" *ngFor="let tag of Tags">
+        <a class="badge badge-warning" style="cursor: pointer; margin-bottom: 2px;" (click)="filterByTags(tag)">{{tag}}</a>
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="col-md-12">
       <div class='row' *ngIf="allposts?.length>0">
         <div class='col-md-12 col-sm-12' *ngFor="let post of pageOfItems">
           <div class="card">

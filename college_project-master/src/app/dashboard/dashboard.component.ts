@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,8 @@ export class DashboardComponent implements OnInit {
   public items;
   public pageOfItems:Array<any>;
   public popularTagsArray;
+  showTags:boolean;
+  public Tags;
   ngOnInit() {
     let userName = localStorage.getItem('username');
     let passWord = localStorage.getItem('password');
@@ -42,6 +45,20 @@ export class DashboardComponent implements OnInit {
     else{
       this.router.navigate(['/login']);
     }
+  }
+  
+  public getAllTags(tagsArray){
+    tagsArray=[];
+    let rep=[];
+    if(this.allposts.length>0){
+      for (let post of this.allposts){
+        tagsArray.push(...post.tags);
+      }
+      tagsArray.forEach(element => {
+        rep.push(element);
+      });
+    }
+    return rep;
   }
   public signOutFunction(){
     localStorage.clear();
@@ -83,14 +100,16 @@ export class DashboardComponent implements OnInit {
   }
   public getPopularTags()
   {
+    this.showTags=!this.showTags;
     let tagsArray=[];
-    if(this.allposts.length>0){
-      for (let post of this.allposts){
-        tagsArray.push(...post.tags);
-      }
-    }
+    if(this.showTags){
+      tagsArray=this.getAllTags(tagsArray);
     this.popularTagsArray=this.sortByFrequencyAndFilter(tagsArray);
     console.log(tagsArray,this.popularTagsArray);
+    }
+    else{
+      this.popularTagsArray=[];
+    }
   }
   public sortByFrequencyAndFilter(myArray) {
   let newArray = [];
@@ -114,6 +133,22 @@ export class DashboardComponent implements OnInit {
   }
 
   return newArray.sort(compareFreq);
+}
+public complete(FTag:string){
+  console.log(FTag);
+  if(!FTag){
+    this.Tags=[];
+    return;
+  }
+  this.Tags=new Set();
+  let tagsArray:Array<string>;
+  tagsArray=this.getAllTags(tagsArray);
+  tagsArray.forEach(element=>{
+    if(element.toLowerCase().indexOf(FTag.toLowerCase())>=0){
+        this.Tags.add(element);
+    }
+  });
+  console.log(this.Tags);
 }
 
 
