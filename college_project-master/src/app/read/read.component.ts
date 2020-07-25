@@ -78,6 +78,8 @@ export class ReadComponent implements OnInit {
     let obj ={
       comment:this.comment,
       blogId:this.currentPost.blogId,
+      userId:this.currentPost.userId,
+      blogTitle:this.currentPost.title,
       username:localStorage.getItem('username')
     }
     this.data.newComment(obj).subscribe(data=>{

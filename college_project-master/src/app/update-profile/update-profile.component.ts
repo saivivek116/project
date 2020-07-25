@@ -30,6 +30,7 @@ export class UpdateProfileComponent implements OnInit {
     this.auth.updateProfile(this.profile).subscribe(data=>{
       console.log("succesfully updated");
       this.toastr.successToastr('Successfully Updated.', 'Success!');
+      
     },
     err=>{
       console.log(err);
