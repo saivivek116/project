@@ -9,7 +9,7 @@ const cors=require('cors');
 const app=express();
 
 const config=require('./config/database');
-const port = 3000 || process.env.PORT;
+const port = 3001;
 //connecting to a database
 // const dev_db_url = 'mongodb://localhost/db2';
 const dev_db_url = config.database;

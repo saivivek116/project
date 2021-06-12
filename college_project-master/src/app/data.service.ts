@@ -8,8 +8,8 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 })
 export class DataService {
   private data ;
-  private url ='http://localhost:3000/blogs';
-  private url2 ='http://localhost:3000';
+  private url ='http://localhost:3001/blogs';
+  private url2 ='http://localhost:3001';
   constructor(private _http: HttpClient, public toastr: ToastrManager) {
     console.log('DAta service called');
   }

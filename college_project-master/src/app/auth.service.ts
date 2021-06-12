@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthService {
   
   //public access=false;
-  private baseUrl ='http://localhost:3000/user';
+  private baseUrl ='http://localhost:3001/user';
   constructor(private _http: HttpClient, public toastr: ToastrManager, private router: Router) { 
     console.log('service called');
   }

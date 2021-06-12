@@ -42,7 +42,7 @@ exports.postCommented=function(username,email,blogTitle){
     from: 'jntuhcesblog@gmail.com',
     to: email,
     subject: 'Message from jntuhcesblog website',
-    text:`${username} posted comment on your blog ${blogTitle} \n To view the comment login to the website http://localhost:3000`
+    text:`${username} posted comment on your blog ${blogTitle} \n To view the comment login to the website http://localhost:3001`
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
